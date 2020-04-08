@@ -18,6 +18,7 @@ public class Main {
         insertionSort();
     }
 
+    //TODO : 외웠냐
     static void insertionSort() {
         for (int i = 1; i < array.length; i++) {
             int loc = i - 1;
