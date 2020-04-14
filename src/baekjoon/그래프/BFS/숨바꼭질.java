@@ -1,5 +1,7 @@
 package baekjoon.그래프.BFS;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -38,5 +40,41 @@ public class 숨바꼭질 {
         }
 
         System.out.println(seconds);
+
+        System.out.println(solution(N,K));
+    }
+
+    //강의 풀이
+    static int solution(int n, int m) {
+        boolean[] check = new boolean[100001];
+        int[] dist = new int[100001];
+
+        check[n] = true;
+        dist[n] = 0;
+        LinkedList<Integer> q = new LinkedList<>();
+        q.add(n);
+
+        while (!q.isEmpty()) {
+            int now = q.pop();
+            if (now - 1 >= 0 && !check[now - 1]) {
+                q.add(now - 1);
+                check[now - 1] = true;
+                dist[now - 1] = dist[now] + 1;
+            }
+            if (now + 1 < 100001 && !check[now + 1]) {
+                q.add(now + 1);
+                check[now + 1] = true;
+                dist[now + 1] = dist[now] + 1;
+            }
+            if (now * 2 < 100001 && !check[now * 2]) {
+                q.add(now * 2);
+                check[now * 2] = true;
+                dist[now * 2] = dist[now] + 1;
+            }
+        }
+
+        System.out.println(Arrays.toString(dist));
+
+        return dist[m];
     }
 }
