@@ -1,4 +1,4 @@
-package programmers.greedy;
+package programmers;
 
 import java.util.Arrays;
 

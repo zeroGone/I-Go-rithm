@@ -1,4 +1,4 @@
-package programmers.greedy;
+package programmers;
 
 public class 체육복 {
     public int solution(int n, int[] lost, int[] reserve) {

@@ -1,4 +1,4 @@
-package programmers.greedy;
+package programmers;
 
 
 public class 조이스틱 {

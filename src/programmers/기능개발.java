@@ -1,4 +1,4 @@
-package programmers.sq;
+package programmers;
 
 import java.util.Arrays;
 import java.util.LinkedList;

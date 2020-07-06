@@ -1,4 +1,4 @@
-package programmers.sq;
+package programmers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
