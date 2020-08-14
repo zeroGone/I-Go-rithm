@@ -1,4 +1,4 @@
-package baekjoon.백트래킹;
+package baekjoon;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

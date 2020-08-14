@@ -1,4 +1,4 @@
-package baekjoon.그래프.BFS;
+package baekjoon;
 
 import java.util.Arrays;
 import java.util.LinkedList;

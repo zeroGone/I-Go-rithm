@@ -1,11 +1,11 @@
-package baekjoon.백트래킹;
+package baekjoon;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
-public class N과M2 {
+public class N과M4 {
     static BufferedWriter writer;
     static int N;
     static int M;
@@ -27,7 +27,7 @@ public class N과M2 {
         if (num == M) writer.write(output.substring(0, output.length() - 1) + '\n');
         if (num >= M) return;
 
-        for (int i = value+1; i < N; i++) {
+        for (int i = value; i < N; i++) {
             solution(num+1, i,output + (i + 1) + " ");
         }
     }
