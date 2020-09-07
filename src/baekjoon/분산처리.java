@@ -3,6 +3,7 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class 분산처리 {
     public static void main(String[] args) throws IOException {
@@ -10,13 +11,14 @@ public class 분산처리 {
         int T = Integer.parseInt(reader.readLine());
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < T; i++) {
-            String[] input = reader.readLine().split(" ");
-            int a = Integer.parseInt(input[0]);
-            int b = Integer.parseInt(input[1]);
-            long value = (long) Math.pow(a, b);
-            System.out.println(value);
-            builder.append(value % 10 == 0 ? 10 : value % 10).append("\n");
+            StringTokenizer st = new StringTokenizer(reader.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            b = b % 4 == 0 ? 4 : b % 4;
+            a = (int)Math.pow(a, b) % 10;
+            a = a == 0 ? 10 : a;
+            builder.append(a).append("\n");
         }
-        System.out.print(builder.deleteCharAt(builder.length()-1).toString());
+        System.out.print(builder.deleteCharAt(builder.length() - 1).toString());
     }
 }
