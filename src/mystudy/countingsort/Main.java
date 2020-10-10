@@ -1,4 +1,4 @@
-package Study.CountingSort;
+package mystudy.countingsort;
 
 import java.util.*;
 /*

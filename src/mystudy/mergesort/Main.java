@@ -1,4 +1,4 @@
-package Study.MergeSort;
+package mystudy.mergesort;
 
 /*
 병합정렬

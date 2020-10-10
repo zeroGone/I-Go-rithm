@@ -1,4 +1,4 @@
-package Study.QuickSort;
+package mystudy.quicksort;
 
 import java.util.Arrays;
 import java.util.Random;

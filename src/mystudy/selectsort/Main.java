@@ -1,4 +1,4 @@
-package Study.SelectSort;
+package mystudy.selectsort;
 
 import java.util.Arrays;
 

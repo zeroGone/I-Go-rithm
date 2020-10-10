@@ -1,6 +1,4 @@
-package Study.CallByValue;
-
-import java.util.*;
+package mystudy.callbyvalue;
 
 /*
 * Java는 참조하는 변수의 값을 전달해주는 Call by value 이다.

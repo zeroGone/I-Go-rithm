@@ -1,4 +1,4 @@
-package Study.InsertionSort;
+package mystudy.insertionsort;
 
 import java.util.Arrays;
 
