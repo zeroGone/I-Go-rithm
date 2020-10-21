@@ -1,8 +1,6 @@
 package mystudy.codinginterview.interviewtest.arrayandstring;
 
-import java.util.Arrays;
-
-/* 136p
+/* 136p 1.1
  * 문제 : 문자열이 주어졌을 때, 중복되는 문자가 있는지 확인하는 함수를 작성하시오.
  * 주의사항 : 자료구조 사용 X
  * */
