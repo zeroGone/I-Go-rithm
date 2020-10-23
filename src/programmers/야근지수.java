@@ -1,54 +1,43 @@
 package programmers;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 public class 야근지수 {
 
+    public static void main(String[] args) {
+        System.out.println(new 야근지수().solution(3, new int[]{1,1}));
+    }
+
     public long solution(int n, int[] works) {
-        Arrays.sort(works);
+        PriorityQueue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
 
-        long avg = 0;
-
-        for (int work : works) {
-            avg += work;
+        for(int work : works){
+            q.offer(work);
         }
 
-        avg = avg / works.length;
-
-        int start = 0;
-
-        for (int index = 0; index < works.length; index++) {
-            if (works[index] > avg) {
-                start = index;
-                break;
-            }
-        }
-
-        int number = 0;
-        int index = works.length - 1;
-
-        while(number < works.length - start && n > 0){
-            if(works[index] <= avg){
-                number++;
-            }else{
-                works[index]--;
-                n--;
-            }
-            index = index == start ? works.length-1 : index - 1;
-        }
-
-        index = works.length - 1;
+        System.out.println(q);
 
         while(n > 0){
-            works[index]--;
+            int work = 0;
+
+            if(!q.isEmpty()){
+                work = q.poll();
+            }
+
+            if(work > 1){
+                q.offer(work-1);
+            }
+
             n--;
-            index = index == 0 ? works.length-1 : index -1;
         }
 
         long answer = 0;
 
-        for(int work : works){
-            answer += work < 0 ? 0 : Math.pow(work, 2);
+        while(!q.isEmpty()){
+            int num = q.poll();
+            System.out.println(num);
+            answer += Math.pow(num, 2);
         }
 
         return answer;
