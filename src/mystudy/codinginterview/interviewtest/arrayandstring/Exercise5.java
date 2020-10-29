@@ -1,10 +1,4 @@
-package javaworkspace;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
+package mystudy.codinginterview.interviewtset.arrayandstring;
 
 /* 137p 1.5
  * 문제 : 두 문자열을 비교해서 하나의 문자 삽입, 삭제, 교체 해서 같게 만들 수 있는지
@@ -13,67 +7,77 @@ import java.util.stream.IntStream;
  * ex3 : pale, bale = true
  * ex4 : pale, bake = false
  * */
-public class Exercise5 {
-	public boolean solution(String str1, String str2) {
+public class Main {
+	public static void main(String[] args) {
+		Main main = new Main();
 
+		System.out.println(main.solution("pale", "ple"));
+		System.out.println(main.solution("pales", "pale"));
+		System.out.println(main.solution("pale", "bale"));
+		System.out.println(main.solution("pale", "bake"));
+	}
+
+	public boolean solution(String str1, String str2) {
 		if (Math.abs(str1.length() - str2.length()) > 1) {
 			return false;
 		}
 
-		Map<Character, Integer> stringMap = new HashMap<>();
+		if (str1.length() < str2.length()) {
+			String temp = str1;
+			str1 = str2;
+			str2 = temp;
+		}
 
-		initMap(stringMap, str1);
-
-		compareStringtoMap(stringMap, str2);
-
-		int differenceNumber = characterDifferenceNumber(stringMap);
-		
-		if(differenceNumber <= 1) {
+		if (isInsertOrDeleteAble(str1, str2)) {
 			return true;
-		}else {
+		}
+
+		if (str1.length() != str2.length()) {
 			return false;
 		}
-	}
 
-	private void initMap(Map<Character, Integer> map, String string) {
-		int stringIndex = 0;
-
-		while (stringIndex < string.length()) {
-			char character = string.charAt(stringIndex++);
-			int characterNumber = 0;
-
-			if (map.containsKey(character)) {
-				characterNumber = map.get(character);
-			}
-
-			map.put(character, characterNumber + 1);
+		if (isEditAble(str1, str2)) {
+			return true;
 		}
+
+		return false;
 	}
 
-	private void compareStringtoMap(Map<Character, Integer> map, String string) {
-		int stringIndex = 0;
-
-		while (stringIndex < string.length()) {
-			char character = string.charAt(stringIndex++);
-			int characterNumber = 0;
-
-			if (map.containsKey(character)) {
-				characterNumber = map.get(character);
-				map.put(character, characterNumber - 1);
+	private boolean isInsertOrDeleteAble(String str1, String str2) {
+		int str1Index = 0;
+		int str2Index = 0;
+		boolean firstDifference = false;
+		while (str1Index < str1.length() && str2Index < str2.length()) {
+			if (str1.charAt(str1Index) == str2.charAt(str2Index)) {
+				str1Index++;
+				str2Index++;
+			} else {
+				if (firstDifference) {
+					return false;
+				} else {
+					firstDifference = true;
+				}
+				str1Index++;
 			}
 		}
+		return true;
 	}
 
-	private int characterDifferenceNumber(Map<Character, Integer> map) {
-		Iterator<Character> iterator = map.keySet().iterator();
-		
-		int sum = 0;
+	private boolean isEditAble(String str1, String str2) {
+		boolean firstEdit = false;
 
-		while (iterator.hasNext()) {
-			int number = map.get(iterator.next());
-			sum += Math.abs(number);
+		int stringIndex = 0;
+
+		while (stringIndex < str1.length()) {
+			if (str1.charAt(stringIndex) != str2.charAt(stringIndex)) {
+				if (firstEdit) {
+					return false;
+				} else {
+					firstEdit = true;
+				}
+			}
+			stringIndex++;
 		}
-
-		return sum;
+		return true;
 	}
 }
