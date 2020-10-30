@@ -7,7 +7,7 @@ package mystudy.codinginterview.interviewtset.arrayandstring;
  * ex3 : pale, bale = true
  * ex4 : pale, bake = false
  * */
-public class Main {
+public class Exercise5 {
 	public static void main(String[] args) {
 		Main main = new Main();
 
