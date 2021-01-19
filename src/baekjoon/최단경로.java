@@ -6,65 +6,76 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class 최단경로 {
-    private static final Map<Integer, List<Edge>> vertexes = new HashMap<>();
+    private static class Edge implements Comparable<Edge>{
+        int weight;
+        int vertex;
+
+        public Edge(int vertex, int weight) {
+            this.weight = weight;
+            this.vertex = vertex;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            return Integer.compare(weight, o.weight);
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             StringTokenizer stringTokenizer = new StringTokenizer(reader.readLine());
-
             int V = Integer.parseInt(stringTokenizer.nextToken());
-            for (int vertex = 1; vertex <= V; vertex += 1) {
-                vertexes.put(vertex, new ArrayList<>());
+            int E = Integer.parseInt(stringTokenizer.nextToken());
+
+            Map<Integer, List<Edge>> vertices = new HashMap<>();
+            Map<Integer, Integer> distances = new HashMap<>();
+            for (int number = 1; number <= V; number += 1) {
+                vertices.put(number, new ArrayList<>());
+                distances.put(number, Integer.MAX_VALUE);
             }
 
-            int E = Integer.parseInt(stringTokenizer.nextToken());
             int startVertex = Integer.parseInt(reader.readLine());
+            distances.put(startVertex, 0);
 
             for (int number = 1; number <= E; number += 1) {
                 stringTokenizer = new StringTokenizer(reader.readLine());
-
                 int u = Integer.parseInt(stringTokenizer.nextToken());
                 int v = Integer.parseInt(stringTokenizer.nextToken());
                 int w = Integer.parseInt(stringTokenizer.nextToken());
-                vertexes.get(u).add(new Edge(v, w));
+                vertices.get(u).add(new Edge(v, w));
             }
 
-            int[] weights = new int[V + 2];
-            Arrays.fill(weights, -1);
-
-            Queue<Edge> queue = new LinkedList<>();
-            queue.addAll(vertexes.get(startVertex));
+            boolean[] visited = new boolean[V+1];
+            Queue<Edge> queue = new PriorityQueue<>();
+            queue.add(new Edge(startVertex, 0));
 
             while (!queue.isEmpty()) {
-                List<Edge> nexts = new ArrayList<>(queue);
-                queue.clear();
-
-                for (Edge next : nexts) {
-                    int nextVertex = next.to;
-                    if (weights[nextVertex] == -1 || weights[nextVertex] >= next.weight) {
-                        weights[nextVertex] = next.weight;
-
-                        List<Edge> edges = new ArrayList<>(vertexes.get(nextVertex));
-                        edges.forEach(edge -> edge.weight += next.weight);
-                        queue.addAll(edges);
+                int vertex = queue.poll().vertex;
+                if(visited[vertex]){
+                    continue;
+                }
+                visited[vertex] = true;
+                for(Edge edge : vertices.get(vertex)){
+                    if(distances.get(edge.vertex) > distances.get(vertex) + edge.weight){
+                        distances.put(edge.vertex, distances.get(vertex) + edge.weight);
+                        queue.add(new Edge(edge.vertex, distances.get(edge.vertex)));
                     }
                 }
             }
 
-            StringBuilder answer = new StringBuilder();
-            for (int vertex = 1; vertex <= V; vertex += 1) {
-                if (vertex == startVertex) {
-                    answer.append(0);
-                } else if (weights[vertex] == -1) {
-                    answer.append("INF");
-                } else {
-                    answer.append(weights[vertex]);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int number : distances.keySet()) {
+                if(distances.get(number) == Integer.MAX_VALUE){
+                    stringBuilder.append("INF");
+                }else{
+                    stringBuilder.append(distances.get(number));
                 }
-                answer.append("\n");
+                stringBuilder.append("\n");
             }
-            System.out.print(answer.deleteCharAt(answer.length() - 1).toString());
+            System.out.print(stringBuilder.deleteCharAt(stringBuilder.length()-1).toString());
         }
     }
+}
 
     private static class Edge {
         final int to;
