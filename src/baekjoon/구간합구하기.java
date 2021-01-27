@@ -31,12 +31,11 @@ public class 구간합구하기 {
 
                 int a = Integer.parseInt(stringTokenizer.nextToken());
                 int b = Integer.parseInt(stringTokenizer.nextToken()) - 1;
-                int c = Integer.parseInt(stringTokenizer.nextToken()) - 1;
 
                 if (a == UPDATE) {
-                    update(segmentTree, b, c + 1);
+                    update(segmentTree, b, Long.parseLong(stringTokenizer.nextToken()));
                 } else {
-                    outputBuilder.append(sum(segmentTree, b, c)).append('\n');
+                    outputBuilder.append(sum(segmentTree, b, Integer.parseInt(stringTokenizer.nextToken()) - 1)).append('\n');
                 }
             }
 
@@ -57,7 +56,7 @@ public class 구간합구하기 {
         return new Part(start, end, left.sum + right.sum, left, right);
     }
 
-    private static void update(Part part, int number, int value) {
+    private static void update(Part part, int number, long value) {
         if (part.start == number && part.end == number) {
             part.sum = value;
             return;
