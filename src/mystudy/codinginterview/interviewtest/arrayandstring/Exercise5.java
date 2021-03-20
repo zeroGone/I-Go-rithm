@@ -8,15 +8,6 @@ package mystudy.codinginterview.interviewtset.arrayandstring;
  * ex4 : pale, bake = false
  * */
 public class Exercise5 {
-	public static void main(String[] args) {
-		Main main = new Main();
-
-		System.out.println(main.solution("pale", "ple"));
-		System.out.println(main.solution("pales", "pale"));
-		System.out.println(main.solution("pale", "bale"));
-		System.out.println(main.solution("pale", "bake"));
-	}
-
 	public boolean solution(String str1, String str2) {
 		if (Math.abs(str1.length() - str2.length()) > 1) {
 			return false;
